@@ -44,6 +44,7 @@ void str_subseq(string, string, char [], int);
 void str_invert(string, string);
 // Determina si un arreglo de n elementos contiene un elemento dado
 int arr_contains(char, char [], int);
+// Determina si dos cadenas son iguales
 int str_compare(string s1, string s2);
 
 
@@ -275,6 +276,18 @@ int arr_contains(char character, char array[], int length) {
 }
 
 
+/*
+ * Determina si dos cadenas son iguales
+ *
+ * Recibe:
+ *  s1 [string]:
+ *   cadena a comparar
+ *  s2 [string]:
+ *   cadena a comparar
+ *
+ * Retorna:
+ *  [bool]
+ */
 int str_compare(string s1, string s2) {
     int i;
     if(str_length(s1) != str_length(s2))
