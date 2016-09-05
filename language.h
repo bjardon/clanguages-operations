@@ -12,38 +12,60 @@
 #define PRACTICA02_OPERACIONESLENGUAJES_LANGUAGE_H_H
 
 
+/** DEPENDENCIAS **/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "mystring.h"
 
+/** TIPOS DE DATOS **/
 
-
+// Definición del tipo de dato _Word
 typedef struct _word
 {
     char value[255];
     struct _word * next;
     struct _word * prev;
 } _Word;
+
+// Definición del alias Word
 typedef _Word * Word;
 
+// Definición del tipo de dato Lang
 typedef struct _lang
 {
     struct _word * first;
 } Lang;
 
-// Function declarations
+/** PROTOTIPOS **/
+
+// ---- Procedimientos básicos ----
+// Inserción de una palabra a un lenguaje al frente
 void lang_addf(Lang *, char *);
+// Inserción de una palabra a un lenguaje al final
 void lang_add(Lang *, string);
+// Eliminación de una palabra de un leguaje dada su posición
 void lang_del(Lang *, int);
+// Obtención de una palabra de un lenguaje dada su posición
 Word lang_get(Lang *, int);
+// Verifica si un lenguaje ya contiene una cadena dada
 int lang_contains(Lang *, char *);
+// Verifica si un lenguaje está vacío (theta)
 int lang_isempty(Lang *);
+// Cuenta las palabras en un lenguaje
 int lang_count(Lang *);
+// Imprime a stdout todas las palabras de un lenguaje
 void lang_print(Lang *list);
-void lang_union(Lang *, Lang *);
+
+// ---- Procedimientos de operaciones con lenguajes ----
+// Unión de dos lenguajes
+void lang_union(Lang *, Lang *, Lang *);
 
 void lang_addf(Lang *lang, char *value) {
     Word element;
+
+    if(lang_contains(lang, value))
+        return;
 
     element = (Word)malloc(sizeof(_Word));
 
@@ -52,6 +74,9 @@ void lang_addf(Lang *lang, char *value) {
 }
 
 void lang_add(Lang *lang, string value) {
+    if(lang_contains(lang, value))
+        return;
+
     if(!lang_isempty(lang)) {
         Word element;
         Word aux;
@@ -151,9 +176,12 @@ void lang_print(Lang *list) {
 }
 
 
-void lang_union(Lang *destination, Lang *origin) {
-    for (int i = 0; i < lang_count(origin); ++i) {
-        lang_add(destination, lang_get(origin, i)->value);
+void lang_union(Lang *destination, Lang *origin1, Lang *origin2) {
+    for (int i = 0; i < lang_count(origin1); ++i) {
+        lang_add(destination, lang_get(origin1, i)->value);
+    }
+    for (int i = 0; i < lang_count(origin2); ++i) {
+        lang_add(destination, lang_get(origin2, i)->value);
     }
 }
 #endif //PRACTICA02_OPERACIONESLENGUAJES_LANGUAGE_H_H
