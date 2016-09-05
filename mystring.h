@@ -44,6 +44,8 @@ void str_subseq(string, string, char [], int);
 void str_invert(string, string);
 // Determina si un arreglo de n elementos contiene un elemento dado
 int arr_contains(char, char [], int);
+int str_compare(string s1, string s2);
+
 
 /** DEFINICIÓN DE FUNCIONES **/
 
@@ -272,5 +274,16 @@ int arr_contains(char character, char array[], int length) {
     return 0;
 }
 
+
+int str_compare(string s1, string s2) {
+    int i;
+    if(str_length(s1) != str_length(s2))
+        return 0;
+    for (i = 0; i < str_length(s1); ++i) {
+        if(*(s1 + i) != *(s2 + i))
+            return 0;
+    }
+    return 1;
+}
 
 #endif //PRACTICA01_MANEJOCADENAS_MYSTRING_H
