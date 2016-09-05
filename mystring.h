@@ -123,6 +123,7 @@ void str_concat(string destination, string origin) {
         i++;
         j++;
     }
+    *(destination + j) = 0;
 }
 
 /**
